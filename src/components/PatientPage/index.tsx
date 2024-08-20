@@ -4,6 +4,7 @@ import PatientsService from '../../services/patients';
 import TransgenderIcon from '@mui/icons-material/Transgender';
 import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';
+import Entry from "./Entry";
 
 import {
     useParams
@@ -27,7 +28,7 @@ setPatientInfo(id);
 } else {
 console.log("No id!");
 }
-},[]);
+},[id]);
 
 if (patient===null){
     return ("Null patient");
@@ -40,6 +41,11 @@ return (
 <div><h1>{patient.name}  {genderIcon} </h1></div>
 ssn: {patient.ssn} <br />
 occupation: {patient.occupation}
+<div>
+<h2>entries</h2>
+{patient.entries.map((entry) => <Entry key={entry.id} entry={entry}/>)}
+
+</div>
 </>
 
 );
