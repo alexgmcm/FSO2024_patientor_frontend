@@ -1,10 +1,29 @@
 import type { Entry } from "../../types";
+import HealthCheckEntry from "./HealthCheckEntry";
+import HospitalEntry from "./HospitalEntry";
+import OccupationalHealthcareEntry from "./OccupationalHealthcareEntry";
+
+const assertNever = (v: never): never => {
+    throw new Error ("unexpected value:" + v);
+};
+const styles = {
+    border: '1px solid rgba(0, 0, 0, 0.05)', 
+};
 
 const Entry = ({entry, diagnosesMap} : {entry: Entry, diagnosesMap: Map<string,string>}) => {
-    return (<div>
-{entry.date} <i>{entry.description}</i>
-<ul>{entry.diagnosisCodes?.map((code) => <li key={code}> {code}: {diagnosesMap.get(code)} </li> )}</ul>
-    </div>);
+
+switch (entry.type){
+case "Hospital":
+    return <div style={styles}><HospitalEntry entry={entry} diagnosesMap={diagnosesMap}/></div>;
+case "OccupationalHealthcare":
+    return <div style={styles}><OccupationalHealthcareEntry entry={entry} diagnosesMap={diagnosesMap} /></div>;
+case "HealthCheck":
+    return <div style={styles}><HealthCheckEntry entry={entry} diagnosesMap={diagnosesMap} /></div>;
+default:
+    return assertNever(entry);
+
+}
+   
 };
 
 export default Entry;
