@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import { Button, Divider, Container, Typography } from '@mui/material';
-
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { apiBaseUrl } from "./constants";
 import { Patient } from "./types";
 
@@ -34,10 +35,12 @@ const App = () => {
             Home
           </Button>
           <Divider hidden />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Routes>
             <Route path="/" element={<PatientListPage patients={patients} setPatients={setPatients} />} />
             <Route path="/patients/:id" element={<PatientPage />} />
           </Routes>
+          </LocalizationProvider>
         </Container>
       </Router>
     </div>

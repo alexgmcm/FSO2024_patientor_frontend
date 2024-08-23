@@ -6,6 +6,7 @@ import TransgenderIcon from '@mui/icons-material/Transgender';
 import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';
 import Entry from "./Entry";
+import EntryForm from "./EntryForm";
 
 import {
     useParams
@@ -14,6 +15,10 @@ const PatientPage = () => {
 const [patient, setPatient] = useState<Patient | null>(null);
 const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
 const id = useParams().id;
+if (!id){
+    throw new Error("Could not extract id!");
+}
+
 
 const setPatientInfo = async (id: string) =>{
     try {
@@ -36,7 +41,7 @@ const diagnoses = await DiagnosesService.getAll();
 setDiagnoses(diagnoses);
 };
 
-console.log(diagnoses);
+
 useEffect(()=> {
 try {
 setDiagnosesAsync();
@@ -61,6 +66,7 @@ return (
 ssn: {patient.ssn} <br />
 occupation: {patient.occupation}
 <div>
+<EntryForm id={id} diagnosesMap={diagnosesMap} />
 <h2>entries</h2>
 {patient.entries.map((entry) => <Entry key={entry.id} entry={entry} diagnosesMap={diagnosesMap}/>)}
 

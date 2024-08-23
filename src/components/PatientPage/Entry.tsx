@@ -1,4 +1,5 @@
 import type { Entry } from "../../types";
+import { EntryType } from "../../types";
 import HealthCheckEntry from "./HealthCheckEntry";
 import HospitalEntry from "./HospitalEntry";
 import OccupationalHealthcareEntry from "./OccupationalHealthcareEntry";
@@ -13,11 +14,11 @@ const styles = {
 const Entry = ({entry, diagnosesMap} : {entry: Entry, diagnosesMap: Map<string,string>}) => {
 
 switch (entry.type){
-case "Hospital":
+case EntryType.Hospital:
     return <div style={styles}><HospitalEntry entry={entry} diagnosesMap={diagnosesMap}/></div>;
-case "OccupationalHealthcare":
+case  EntryType.OccupationalHealthcare:
     return <div style={styles}><OccupationalHealthcareEntry entry={entry} diagnosesMap={diagnosesMap} /></div>;
-case "HealthCheck":
+case  EntryType.HealthCheck:
     return <div style={styles}><HealthCheckEntry entry={entry} diagnosesMap={diagnosesMap} /></div>;
 default:
     return assertNever(entry);
