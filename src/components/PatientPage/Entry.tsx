@@ -8,7 +8,7 @@ const assertNever = (v: never): never => {
     throw new Error ("unexpected value:" + v);
 };
 const styles = {
-    border: '1px solid rgba(0, 0, 0, 0.05)', 
+    border: '1px solid rgba(0, 0, 0, 0.5)', 
 };
 
 const Entry = ({entry, diagnosesMap} : {entry: Entry, diagnosesMap: Map<string,string>}) => {

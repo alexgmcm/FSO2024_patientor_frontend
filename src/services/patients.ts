@@ -21,15 +21,15 @@ const getOne = async (id: string) => {
 
 const addEntry = async (id:string, entry: EntryWithoutId) => {
   try {
-  const recvPatient = await axios.post<Patient>(`${apiBaseUrl}/patients/${id}/entries`, entry);
-  console.log(recvPatient);
-  return recvPatient;
+  const {data} = await axios.post<Patient>(`${apiBaseUrl}/patients/${id}/entries`, entry);
+  return data;
 } catch (error) {
   let errorMessage = "Unknown error!";
   if (error instanceof AxiosError && error.response) {
     errorMessage = error.response.data;
   }
   throw new Error(errorMessage);
+  
   
 }
 };

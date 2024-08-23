@@ -59,14 +59,14 @@ if (patient===null){
 } else {
 
 const genderIcon = patient.gender==="male" ? <MaleIcon /> : patient.gender === "female" ? <FemaleIcon /> : <TransgenderIcon />;
-
+console.log(patient);
 return (
 <>
 <div><h1>{patient.name}  {genderIcon} </h1></div>
 ssn: {patient.ssn} <br />
 occupation: {patient.occupation}
 <div>
-<EntryForm id={id} diagnosesMap={diagnosesMap} />
+<EntryForm id={id} diagnosesMap={diagnosesMap} setPatient={setPatient}/>
 <h2>entries</h2>
 {patient.entries.map((entry) => <Entry key={entry.id} entry={entry} diagnosesMap={diagnosesMap}/>)}
 
